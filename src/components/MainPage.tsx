@@ -96,15 +96,8 @@ export function MainPage() {
         </div>
       </header>
 
-      <div className="zoom-container">
-        <div
-          style={{
-            transform: `scale(${zoom / 100})`,
-            transformOrigin: 'top left',
-          }}
-        >
-          <MainLayout />
-        </div>
+      <div className="app-root">
+        <MainLayout />
       </div>
     </div>
   )

@@ -124,11 +124,184 @@ input:focus-visible, button:focus-visible {
 /* Zoom container wraps the main layout with scroll on overflow */
 .zoom-container {
   flex: 1;
-  overflow: auto;
+  overflow: hidden; /* prevent native vertical scroll; we scale content to fit */
   min-height: 0;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .zoom-container > div {
   min-width: fit-content;
+  width: 100%;
+  transition: transform 120ms ease;
 }
+
+/* Adaptive root font-size to keep layout readable while fitting vertically */
+html {
+  font-size: clamp(13px, 0.6vw + 0.6vh, 16px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+}
+
+/* App grid: main content + right column sidebar like friend's layout */
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1rem;
+  align-items: start;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Polished visual styles */
+:root {
+  --bg: #fffaf0; /* soft cream */
+  --card-bg: #ffffff;
+  --muted-bg: rgba(0,0,0,0.04);
+  --card-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  --radius: 12px;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--color-foreground);
+}
+
+/* Card polish */
+[data-slot="card"], .card {
+  background: var(--card-bg) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--card-shadow) !important;
+  border: 1px solid rgba(15,23,42,0.04) !important;
+}
+
+/* Card header and title polishing */
+[data-slot="card-header"] {
+  padding: 0.75rem 1rem !important;
+}
+
+[data-slot="card-title"] {
+  font-weight: 600 !important;
+  color: var(--color-primary, #c9a84c) !important;
+}
+
+[data-slot="card-content"] {
+  padding: 0.75rem 1rem !important;
+}
+
+/* Inputs */
+input, textarea, select {
+  border: 1px solid rgba(15,23,42,0.08) !important;
+  background: #fff !important;
+  border-radius: 8px !important;
+  padding: 8px 10px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(201,168,76,0.08), 0 1px 2px rgba(15,23,42,0.04) !important;
+  border-color: rgba(201,168,76,0.9) !important;
+}
+
+/* Buttons */
+[data-slot="button"], button {
+  border-radius: 10px !important;
+  padding: 6px 10px !important;
+  box-shadow: 0 2px 6px rgba(15,23,42,0.06);
+}
+
+/* Primary accent refinement */
+:root {
+  --color-primary: #c79b3d;
+  --color-primary-foreground: #fff;
+}
+
+/* Tables */
+table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  width: 100%;
+}
+
+table th, table td {
+  padding: 8px 10px !important;
+  border-bottom: 1px solid rgba(15,23,42,0.04) !important;
+}
+
+/* Reduce overlarge whitespace at page bottom */
+main, .app-root { min-height: calc(100vh - 64px); }
+
+
+.app-root {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 1200px) {
+  .app-grid {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+  }
+}
+
+/* Aggressive compression: reduce font size, paddings, gaps to fit more content on screen */
+:root {
+  --compact-font-min: 11px;
+  --compact-font-max: 13px;
+}
+
+html {
+  font-size: clamp(var(--compact-font-min), 0.4vw + 0.6vh, var(--compact-font-max));
+}
+
+/* Cards and panels */
+.card, .ui-card, .card-header, .card-content, .card-footer {
+  padding: 0.5rem !important;
+}
+
+/* Tighten header and top bar */
+header, .topbar {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+/* Inputs, selects, buttons — compact */
+input, select, textarea, button {
+  padding: 6px 8px !important;
+  height: 30px !important;
+  font-size: 0.95rem !important;
+  border-radius: 6px !important;
+}
+
+button {
+  min-width: 28px !important;
+}
+
+/* Reduce vertical gaps used by utility classes */
+.space-y-4 > * + * { margin-top: 0.5rem !important; }
+.space-y-2 > * + * { margin-top: 0.25rem !important; }
+.gap-4 { gap: 0.5rem !important; }
+
+.app-grid { gap: 0.5rem !important; padding: 0.5rem !important; }
+
+/* Tables: tighter cells */
+table th, table td { padding: 6px 8px !important; font-size: 0.9rem; }
+
+/* Footer and small labels */
+.footer, footer { padding: 6px 8px !important; font-size: 0.85rem !important; }
+
+/* Reduce margins on utility controls */
+.max-w-7xl { max-width: 1400px !important; }
+

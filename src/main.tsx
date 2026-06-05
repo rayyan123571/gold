@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './i18n'
 import './index.css'
 import App from './App'
+import { seedTestAccount } from '@/setup/seedAccounts'
 
 const theme = localStorage.getItem('theme')
 if (theme === 'dark') {
@@ -35,8 +36,11 @@ if (memInterval && import.meta.env.PROD) {
   clearInterval(memInterval)
 }
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// Seed a test account if none exists, then render app
+seedTestAccount().finally(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+})

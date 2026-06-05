@@ -33,7 +33,7 @@ export function MainLayout() {
         onTajzia={() => setTajziaOpen(true)}
       />
 
-      <div className="flex-1 flex flex-col lg:flex-row">
+      <div className="flex-1 app-grid">
         <section className="flex-1 border-r border-amber-200 dark:border-zinc-700 p-4">
           <div className="space-y-4">
             <NaqadLedger />
@@ -44,15 +44,15 @@ export function MainLayout() {
           </div>
         </section>
 
-        <section className="flex-1 p-4 space-y-4">
+        <section className="w-96 p-4 space-y-4">
           <ClientBlock />
           <ArchimedesBlock />
           <LaabReceipt />
-          <div className="flex flex-col lg:flex-row gap-3 items-start">
-            <div className="flex-1">
+          <div className="flex flex-col gap-3 items-start">
+            <div className="w-full">
               <WasooliReceipt />
             </div>
-            <div className="w-full lg:w-48 shrink-0">
+            <div className="w-full">
               <WasooliSideColumn />
             </div>
           </div>

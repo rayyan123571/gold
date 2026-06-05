@@ -44,7 +44,7 @@ export function LoginPage() {
         </Button>
       </div>
 
-      <Card className="w-full max-w-md shadow-lg border-amber-200 dark:border-zinc-700">
+        <Card className="w-full max-w-md shadow-lg border-amber-200 dark:border-zinc-700">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-amber-800 dark:text-amber-400">
             {t('app.title')}
@@ -104,7 +104,7 @@ export function LoginPage() {
             </button>
           </p>
         </CardContent>
-      </Card>
+        </Card>
     </div>
   )
 }

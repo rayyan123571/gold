@@ -3,7 +3,7 @@ import Dexie, { type EntityTable } from 'dexie'
 export interface Account {
   id?: number
   username: string
-  password: string
+  password_hash?: string
   created_at: Date
 }
 
